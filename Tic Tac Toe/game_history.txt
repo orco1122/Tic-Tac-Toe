@@ -1,3 +1,0 @@
-Idan,Computer,X
-Computer,Idan,O
-Idan,Noa,Draw
