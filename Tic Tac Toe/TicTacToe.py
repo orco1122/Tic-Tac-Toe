@@ -1,4 +1,4 @@
-import turtle
+                     import turtle
 import random
 import pickle
 import os
@@ -153,68 +153,6 @@ def get_computer_move():
     return random.choice(cells) if cells else (None, None)
 
 
-def main_game_loop():
-    global game_board
-    t = setup_board()
-    draw_grid(t)
-
-    mode = turtle.textinput("Mode", "Play against Computer? (y/n)")
-    vs_computer = (mode and mode.lower() == 'y')
-
-    if os.path.exists(SAVE_FILE):
-        load = turtle.textinput("Load", "Load saved game? (y/n)")
-        if load and load.lower() == 'y':
-            game_board = load_game()
-            redraw_board(t, game_board)
-
-    x_count = sum(row.count('X') for row in game_board if isinstance(row, list))
-    o_count = sum(row.count('O') for row in game_board if isinstance(row, list))
-    curr = 'O' if x_count > o_count else 'X'
-    moves = x_count + o_count
-    hist_check = turtle.textinput("History", "Print game history to console? (y/n)")
-    if hist_check and hist_check.lower() == 'y':
-        print_history()
-
-    if os.path.exists(SAVE_FILE):
-        load = turtle.textinput("Load", "Load saved game? (y/n)")
-        if load and load.lower() == 'y':
-            with open(SAVE_FILE, "rb") as f:
-                game_board = pickle.load(f)
-            for r in range(1, 4):
-                for c in range(1, 4):
-                    if game_board[r][c] in ['X', 'O']:
-                        draw_symbol(t, r, c, game_board[r][c])
-
-    while moves < 9:
-        if vs_computer and curr == 'O':
-            row, col = get_computer_move()
-        else:
-            row, col = get_player_move(curr)
-
-        if row is None:
-            save = turtle.textinput("Exit", "Save game? (y/n)")
-            if save and save.lower() == 'y': save_game(game_board)
-            return
-
-        game_board[row][col] = curr
-        draw_symbol(t, row, col, curr)
-        moves += 1
-
-        win, coords = check_win(game_board, curr)
-        if win:
-            highlight_win(t, coords)
-            turtle.textinput("Over", f"{curr} Wins!")
-            if os.path.exists(SAVE_FILE): os.remove(SAVE_FILE)
-            break
-
-        if moves == 9:
-            turtle.textinput("Over", "Draw!")
-            if os.path.exists(SAVE_FILE): os.remove(SAVE_FILE)
-            break
-
-        curr = 'O' if curr == 'X' else 'X'
-    turtle.done()
-
 def print_history():
 
     print("\n--- Game History ---")
@@ -309,4 +247,5 @@ def main_game_loop():
         curr = 'O' if curr == 'X' else 'X'
     turtle.done()
 if __name__ == "__main__":
+
     main_game_loop()
