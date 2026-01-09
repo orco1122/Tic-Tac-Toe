@@ -14,4 +14,5 @@ Before you begin, ensure you have [Python](https://www.python.org/downloads/) in
 ## 💻 How to Run
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/orco1122/tic-tac-toe-python.git](https://github.com/YOUR_USERNAME/tic-tac-toe-python.git)
+
+   git clone [https://github.com/orco1122/tic-tac-toe-python.git](https://github.com/orco1122/tic-tac-toe-python.git)
